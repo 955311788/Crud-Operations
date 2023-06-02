@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    </title>
+</head>
+<body>
+    <h1>Add Plane</h1>
+    <h4><em>Add a new plane to the fleet available to rent.</em></h4>
+    <br>
+    <form action ="/createPlane" method="GET">
+        <label>Plane ID</label>
+        <input type="text" name = "planeID" size = "15" maxlength="15" >
+        <br>
+        <br>
+        <label>Year</label>
+        <input type="number" name = "year" size = "15" maxlength="15" >
+        <br>
+        <br>
+        <label>Make</label>
+        <input type="text" name = "make" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Model</label>
+        <input type="text" name = "model" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Color</label>
+        <input type="text" name = "color" size = "50" maxlength="50" required="required">
+        <br>
+        <br>
+        <label>Horsepower </label>
+        <input type="number" name="horsepower" />    
+        <br>
+        <br>
+        <label>VFR</label>
+        <input type="checkbox" name = "vfr" size = "40" maxlength="40" >
+        <br>
+        <br>
+        <input type ="submit" value = "Add Plane" >
+    </form>
+    <h2><a href = "index.html" > Home Page</a></h1>
+</body>
+
+</html>

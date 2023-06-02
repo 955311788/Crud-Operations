@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        function populateForm() {
+            // Retrieve the form elements
+            const certificateNumberInput = document.querySelector('input[name="certificateNumber"]');
+            const nameInput = document.querySelector('input[name="name"]');
+            const addressInput = document.querySelector('input[name="Address"]');
+            const nationalityInput = document.querySelector('input[name="nationality"]');
+            const dobInput = document.querySelector('input[name="dob"]');
+
+            // Make a request to retrieve the record based on the certificate number
+            const certificateNumber = certificateNumberInput.value;
+            const url = `/retrieve?certificateNumber=${certificateNumber}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the form fields with the retrieved data
+                    certificateNumberInput.value = data.certificateNumber;
+                    nameInput.value = data.name;
+                    addressInput.value = data.Address;
+                    nationalityInput.value = data.nationality;
+                    dobInput.value = data.dob;
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+    </title>
+</head>
+<body>
+    <h1>Pilot Certificate</h1>
+    <h4><em>Input your pilot certificate information then proceed to the next page for new member enrollment.</em></h4>
+    <br>
+    <form action ="/create" method="GET">
+        <label>Pilot Certificate #</label>
+        <input type="number" name = "certificateNumber" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Name</label>
+        <input type="text" name = "name" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Address</label>
+        <input type="text" name = "Address" size = "50" maxlength="50" required="required">
+        <br>
+        <br>
+        <label>Nationality</label>
+        <input type="text" name = "nationality" size = "40" maxlength="40" required="required">
+        <br>
+        <br>
+        <label>Date Of Birth</label>
+        <input type="date" name= "dob" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <br>
+        <br>
+        <input type ="submit" value = "Create Certificate" >
+        <input type="submit" value="Update Certificate" formaction="/update" formmethod="GET">
+        <input type="submit" value="Delete Certificate" formaction="/delete" formmethod="GET">
+        <input type="submit" value="Retrieve Record" onclick="populateForm()">
+    </form>
+    <h2><a href="newMember.html">Next</a></h2>
+    <br>
+    
+</body>
+
+</html>

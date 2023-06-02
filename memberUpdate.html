@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch member IDs from the server
+            $.get("/retrieveMembers", function(data) {
+                var dropdown = $("#membersids");
+                dropdown.empty(); // Clear existing options
+
+                // Generate option elements for each member ID
+                data.forEach(function(memberID) {
+                    dropdown.append($("<option></option>").attr("value", memberID).text(memberID));
+                });
+
+                // Trigger change event to populate form fields with the initial member details
+                dropdown.trigger("change");
+            });
+
+            // Handle change event of member ID dropdown
+            $("#membersids").change(function() {
+                var selectedMemberID = $(this).val();
+
+                // Fetch member details based on the selected ID
+                $.get("/retrieveMember", { memberID: selectedMemberID }, function(member) {
+                    // Check if the response is an array or object
+                    if (Array.isArray(member)) {
+                        member = member[0]; // Select the first object from the array
+                    }
+
+                    // Populate form fields with the member details
+                    $("input[name='lastName']").val(member.lastName);
+                    $("input[name='firstName']").val(member.firstName);
+                    $("input[name='address']").val(member.address);
+                    $("input[name='phoneNumber']").val(member.phoneNumber);
+                    $("input[name='email']").val(member.email);
+                    $("input[name='dob']").val(member.dob);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Member Update</h1>
+    <h4><em>Fill out the information below to either update or delete a member.</em></h4>
+    <br>
+    <form action ="/new-Member" method="GET">
+        <select name="memberID" id="membersids">
+            <option value="">Loading members.</option>
+        </select>
+        <br>
+        <br>
+        <label>Last Name</label>
+        <input type="text" name = "lastName" size = "15" maxlength="15" >
+        <br>
+        <br>
+        <label>First Name</label>
+        <input type="text" name = "firstName" size = "15" maxlength="15" >
+        <br>
+        <br>
+        <label>Address</label>
+        <input type="text" name = "address" size = "50" maxlength="50" >
+        <br>
+        <br>
+        <label>Phone Number </label>
+        <input type="number" name="phoneNumber" />    
+        <br>
+        <br>
+        <label>Email</label>
+        <input type="text" name = "email" size = "40" maxlength="40" >
+        <br>
+        <br>
+        <label>Date Of Birth</label>
+        <input type="date" name= "dob" size = "15" maxlength="15" required="required">
+        <br>
+        <br>
+        <input type="submit" value="Update Member" formaction="/updateMember" formmethod="GET">
+        <input type="submit" value="Delete Member" formaction="/deleteMember" formmethod="GET">
+        <br>
+    </form>
+    <h2><a href = "index.html" > Home Page</a></h1>
+</body>
+
+</html>

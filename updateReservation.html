@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    </title>
+</head>
+<body>
+    <h1>Rental update form</h1>
+    <h4><em>Fill out the information below to update or delete a plane reservation.</em></h4>
+    <br>
+<form action ="/plane rental" method="GET">
+    <label>Please enter the Rental ID</label>
+    <input type="text" MemberID = "id" size = "15" maxlength="15">
+    <br>
+    <br>
+    <label> New Rental Date</label>
+    <input type="date" rentalDate = "date" size = "15" maxlength="15" >
+    <br>
+    <br>
+    <label> New Hours planned</label>
+    <input type = 'number' rentalHours = "hours" size = "10" maxlength = "15" >
+    <br>
+    <br>
+    <label for="Planes">Change plane:</label>
+    <select id="planes" name="planes">
+      <option value="12th Colony">12th Colony</option>
+      <option value="Cylon">Cylon</option>
+      <option value="New Cap">New Cap</option>
+      <option value="Cessna">Cessna</option>
+      <option value="King Air">King Air</option>
+      <option value="Palatus">Palatus</option>
+      <option value="Mooney">Mooney</option>
+      <option value="Cirrus">Cirrus</option>
+    </select>
+    <br>
+    <br>
+    <label> Estimated Cost</label>
+    <input type="text" name="estimatedCost" value="0.00" disabled /> 
+    <br>
+    <br>
+    <button type="submit" > Update </button>
+    <br>
+    <br>
+    <button type="delete" > Delete Reservation </button>
+
+</form>
+<h2><a href = "Index.html" > Home Page</a></h1>
+</body>
+
+</html>

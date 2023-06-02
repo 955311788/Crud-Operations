@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>New Member Sign up</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Generate and populate random number in the memberID field
+            var randomID = generateRandomNumber();
+            $("#memberID").val(randomID);
+        });
+
+        function generateRandomNumber() {
+            const min = 100000;
+            const max = 999999;
+            const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            return randomNumber;
+        }
+    </script>
+</head>
+<body>
+    <h1>New Member Sign up</h1>
+    <h4><em>Fill out the information below to finish your enrollment.</em></h4>
+    <br>
+    <form action="/createMember" method="GET">
+        <label>Member ID</label>
+        <input type="number" id="memberID" name="memberID" size="15" maxlength="15">
+        <br>
+        <br>
+        <label>Certificate ID</label>
+        <input type="text" name="certificateID" size="15" maxlength="15" disabled>
+        <br>
+        <br>
+        <label>Last Name</label>
+        <input type="text" name="lastName" size="15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>First Name</label>
+        <input type="text" name="firstName" size="15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Address</label>
+        <input type="textarea" name="address" size="50" maxlength="50" required="required">
+        <br>
+        <br>
+        <label>Phone Number</label>
+        <input type="text" name="phoneNumber" required="required">
+        <br>
+        <br>
+        <label>Email</label>
+        <input type="text" name="email" size="40" maxlength="40" required="required">
+        <br>
+        <br>
+        <label>Date Of Birth</label>
+        <input type="date" name="dob" size="15" maxlength="15" required="required">
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+        <br>
+    </form>
+    <h2><a href="index.html">Home Page</a></h2>
+</body>
+</html>

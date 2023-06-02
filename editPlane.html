@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Edit Plane</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch plane IDs from the server
+            $.get("/retrievePlanes", function(data) {
+                var dropdown = $("#planes");
+                dropdown.empty(); // Clear existing options
+                
+                // Generate option elements for each plane ID
+                data.forEach(function(planeID) {
+                    dropdown.append($("<option></option>").attr("value", planeID).text(planeID));
+                });
+            });
+
+            // Handle change event of plane ID dropdown
+            $("#planes").change(function() {
+                var selectedPlaneID = $(this).val();
+                
+                // Fetch plane details based on the selected ID
+                $.get("/retrievePlane", { planeID: selectedPlaneID }, function(plane) {
+                    // Populate form fields with the plane details
+                    $("#year").val(plane.year);
+                    $("#make").val(plane.make);
+                    $("#model").val(plane.model);
+                    $("#color").val(plane.color);
+                    $("#horsepower").val(plane.horsepower);
+                    $("#vfr").prop("checked", plane.vfr);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Edit Plane</h1>
+    <h4><em>Edit infortmation and specs for a specific plane or remove it from the rental listing.</em></h4>
+    <br>
+    <form>
+        <label for="planeID">Plane ID:</label>
+        <select name="planeID" id="planes">
+            <option value="">Loading plane IDs...</option>
+        </select>
+        <br>
+        <br>
+        <label>Year</label>
+        <input type="number" id="year" name="year" size="15" maxlength="15">
+        <br>
+        <br>
+        <label>Make</label>
+        <input type="text" id="make" name="make" size="15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Model</label>
+        <input type="text" id="model" name="model" size="15" maxlength="15" required="required">
+        <br>
+        <br>
+        <label>Color</label>
+        <input type="text" id="color" name="color" size="50" maxlength="50" required="required">
+        <br>
+        <br>
+        <label>Horsepower</label>
+        <input type="number" id="horsepower" name="horsepower">    
+        <br>
+        <br>
+        <label>VFR</label>
+        <input type="checkbox" id="vfr" name="vfr" size="40" maxlength="40">
+        <br>
+        <br>
+        <input type="submit" value="Update Plane" formaction="/updatePlane" formmethod="GET">
+        <input type="submit" value="Delete Plane" formaction="/deletePlane" formmethod="GET">
+    </form>
+    <h2><a href="index.html">Home Page</a></h2>
+</body>
+</html>
